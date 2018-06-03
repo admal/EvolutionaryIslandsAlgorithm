@@ -1,6 +1,8 @@
 import numpy as np
 import random
 import config_islands as cfg
+from genetic_functions import *
+
 
 def generate_initial_populations(sizes, dim, min=0, max=1):
 	islands = []
@@ -9,65 +11,15 @@ def generate_initial_populations(sizes, dim, min=0, max=1):
 	return islands
 
 
-# tournament selection
-def selection(fitness, k):
-	won = []
-	indices = range(len(fitness))
-	for i in range(k):
-		chosen = random.sample(indices, cfg.TOURNAMENT_SIZE)
-		won.append(np.argmin(fitness[chosen]))
-
-	return won
-
-
-def mutation(individual):
-	new_individual = []
-	for i in individual:
-		r = -1 + random.random() * 2
-		new_individual.append(i + r)
-	return new_individual
-
-
-def crossover(individuals):
-	length = len(individuals[0])
-	weights = np.random.rand(length)
-	child = []
-	for individual in individuals:
-		for i in range(length):
-			pass
-
-
-def crossover_2(individual1, individual2):
-	length = len(individual1)
-	weights = np.random.rand(length)
-	child = []
-	for i in range(length):
-		child.append(individual1[i] + weights[i] * (individual2[i] - individual1[i]))
-
-	return child
-
-
-def get_fitness(population, fitness_function):
-	fitness = np.array([])
-	for individual in population:
-		fitness = np.append(fitness, fitness_function(individual))
-
-	return fitness
-
-
-def tmp_fun(individual):
-	return np.sum([gene**2 for gene in individual])
-	
-
 def generate_new_population(population, fitness):
 	offspring = []
 	for i in population:
 		if random.random() < cfg.RECOMB_PROB:
-			selected_idx = selection(fitness, 2)
+			selected_idx = selection(fitness, 2, cfg.TOURNAMENT_SIZE)
 			crossed = crossover_2(population[selected_idx[0]], population[selected_idx[1]])
 			offspring.append(mutation(crossed))
 		else:
-			selected_idx = selection(fitness, 1)
+			selected_idx = selection(fitness, 1, cfg.TOURNAMENT_SIZE)
 			offspring.append(mutation(population[selected_idx[0]]))
 
 	return offspring
@@ -110,11 +62,6 @@ def main():
 			for island in islands:
 				fitness.append(get_fitness(island, fitness_function))
 			#print("global minimum across islands after migrations: ", np.array(fitness).flatten().min())	
-
-	fitness = []
-	for island in islands:
-		fitness.append(get_fitness(island, fitness_function))
-	print("global minimum: ", np.array(fitness).flatten().min())
 
 
 if __name__ == '__main__':

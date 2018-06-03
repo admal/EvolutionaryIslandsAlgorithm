@@ -8,17 +8,17 @@ MUTATE_COEF = 0.1
 # dany osobnik bedzie rekombinowany z innym
 RECOMB_PROB = 0.2
 # rozmiar populacji - natural number - ilosc osobnikow w populacji
-POPULATION_SIZES = [100, 100, 100]
+POPULATION_SIZES = [300, 100, 200]
 # liczba epok - natural number - liczba generacji nowych populacji potomnych
-MAX_ITERS = 200
+MAX_ITERS = 10
 
-TOURNAMENT_SIZE = 10
+TOURNAMENT_SIZE = 50
 # wielkosc migracji - float - jaka czesc populacji zostanie przeniesiona do
 # innej populacji
-MIGRATION_SIZE = 10
+MIGRATION_SIZE = 20
 # interwal migracji - natural number - liczba epok, ktora musi minac od
 # ostatniej migracji, zeby nastapila nowa migracja
-MIGRATION_INTERVAL = 10
+MIGRATION_INTERVAL = 20
 # topologia polaczen - graph - graf polaczen gdzie wierzcholki to podpopulacje,
 # a krawedzie ozanczaja czy z jednej podpopulacji osobniki moga
 # zmigrowac do innej podpopulacji
