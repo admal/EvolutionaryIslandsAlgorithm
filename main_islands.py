@@ -17,10 +17,10 @@ def generate_new_population(population, fitness):
 		if random.random() < cfg.RECOMB_PROB:
 			selected_idx = selection(fitness, 2, cfg.TOURNAMENT_SIZE)
 			crossed = crossover_2(population[selected_idx[0]], population[selected_idx[1]])
-			offspring.append(mutation(crossed))
+			offspring.append(mutation(crossed, MUTATION_COEF))
 		else:
 			selected_idx = selection(fitness, 1, cfg.TOURNAMENT_SIZE)
-			offspring.append(mutation(population[selected_idx[0]]))
+			offspring.append(mutation(population[selected_idx[0]], MUTATION_COEF))
 
 	return offspring
 
@@ -33,7 +33,7 @@ def migrate(islands, fitness_function):
 
 		#see topology and replace destination islands weakest with this current islands strongest
 		for neighbour_idx in cfg.TOPOLOGY[island_idx]:
-			print("Migrating from island[{}] to island[{}]".format(island_idx, neighbour_idx))
+			# print("Migrating from island[{}] to island[{}]".format(island_idx, neighbour_idx))
 			neighbour_island_fitness = get_fitness(islands[neighbour_idx], fitness_function)
 			worst_idxs = np.argsort(neighbour_island_fitness)[-cfg.MIGRATION_SIZE:] # take the worst from current island
 			for worst_idx, best_idx in zip(worst_idxs, best_idxs):
@@ -53,7 +53,7 @@ def main():
 			population = generate_new_population(population, fitness)
 			islands[i] = population
 			fitness = get_fitness(population, fitness_function)
-			print("Island: {}; Epoch: {}; Point: {}; Min: {};".format(i, epoch, population[np.argmin(fitness)], np.min(fitness)))
+			# print("Island: {}; Epoch: {}; Point: {}; Min: {};".format(i, epoch, population[np.argmin(fitness)], np.min(fitness)))
 		
 		epoch += 1
 		if epoch%cfg.MIGRATION_INTERVAL == 0:

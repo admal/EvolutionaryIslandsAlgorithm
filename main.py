@@ -1,6 +1,7 @@
 import numpy as np
 import random
 from genetic_functions import *
+import sys
 
 # PROBLEM INSTANCES
 instances = []
@@ -12,7 +13,6 @@ TOURNAMENT_SIZE = int(POPULATION_SIZE / 10)
 
 def generate_initial_population(size, dim, min=0, max=1):
 	"""
-
 	:param max:
 	:param min:
 	:param dim: dimensions of each element
@@ -28,7 +28,7 @@ def main():
 	fitness = get_fitness(population, fitness_function)
 	print(population)
 	epoch = 0
-	while epoch < MAX_ITERS:
+	while epoch < MAX_ITERS or :
 		offspring = []
 		for i in population:
 			if random.random() < 0.2:
@@ -48,4 +48,9 @@ def main():
 
 
 if __name__ == '__main__':
+	argv = sys.argv[1:]
+	if len(argv) > 0:
+		MAX_ITERS = argv[0]
+		POPULATION_SIZE = argv[1]
+	
 	main()

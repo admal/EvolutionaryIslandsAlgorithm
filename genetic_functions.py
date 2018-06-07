@@ -15,13 +15,12 @@ def selection(fitness, k, tournament_size):
 	return won
 
 
-def mutation(individual):
+def mutation(individual, MUTATION_COEF):
 	new_individual = []
 	for i in individual:
-		r = -1 + random.random() * 2
+		r = MUTATION_COEF*(-1 + random.random() * 2)
 		new_individual.append(i + r)
 	return new_individual
-
 
 
 def crossover(individuals):
