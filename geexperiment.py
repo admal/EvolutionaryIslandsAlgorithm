@@ -63,17 +63,17 @@ def run_basic_ae(fun, x_start, max_iters, ftarget):
     best_f = np.inf
     best_x = np.inf
     epoch = 0
-    while epoch < max_iters or abs(ftarget - best_f) < EPSILON :
+    while epoch < max_iters and abs(ftarget - best_f) > EPSILON :
         offspring = []
         for i in population:
             if random.random() < 0.2:
                 selected_idx = selection(fitness, 2, TOURNAMENT_SIZE)
                 # print(selected_idx)
                 crossed = crossover_2(population[selected_idx[0]], population[selected_idx[1]])
-                offspring.append(mutation(crossed, MUTATION_RANGE))
+                offspring.append(mutation(crossed, MUTATION_COEF))
             else:
                 selected_idx = selection(fitness, 1, TOURNAMENT_SIZE)
-                offspring.append(mutation(population[selected_idx[0]]))
+                offspring.append(mutation(population[selected_idx[0]], MUTATION_COEF))
  
         population = offspring
         epoch = epoch + 1
