@@ -35,7 +35,7 @@ opts = dict(algid='PUT ALGORITHM NAME',
 maxfunevals = '10 * dim'  # 10*dim is a short test-experiment taking a few minutes
 # INCREMENT maxfunevals SUCCESSIVELY to larger value(s)
 minfunevals = 'dim + 2'  # PUT MINIMAL sensible number of EVALUATIONS before to restart
-maxrestarts = 100      # SET to zero if algorithm is entirely deterministic
+maxrestarts = 50      # SET to zero if algorithm is entirely deterministic
 
 
 def generate_initial_population(sizes, dim, min=0, max=1):

@@ -32,12 +32,12 @@ opts = dict(algid='PUT ALGORITHM NAME',
 maxfunevals = '10 * dim' # 10*dim is a short test-experiment taking a few minutes 
 # INCREMENT maxfunevals SUCCESSIVELY to larger value(s)
 minfunevals = 'dim + 2'  # PUT MINIMAL sensible number of EVALUATIONS before to restart
-maxrestarts = 100      # SET to zero if algorithm is entirely deterministic 
-POPULATION_SIZE = 100
-TOURNAMENT_SIZE = int(POPULATION_SIZE / 10)
+maxrestarts = 50      # SET to zero if algorithm is entirely deterministic 
+POPULATION_SIZE = 50
+TOURNAMENT_SIZE = int(10)
 EPSILON = 1e-04
-MUTATION_COEF = 0.001
-MUTATION_PROB = 0.02
+MUTATION_COEF = 0.01
+MUTATION_PROB = 0.005
 RECOMBINATION_PROB = 0.02
 
 def generate_initial_population(size, dim, min=0, max=1):
